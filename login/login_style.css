@@ -1,0 +1,172 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff;
+}
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+
+.container {
+    display: flex;
+    overflow: hidden;
+    max-width: 1000px;
+    justify-content: center;
+    align-items: center;
+ }
+
+
+
+.left-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-side img{
+    cursor:default;!important;
+}
+
+.right-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 70px;
+    width: 100%;
+
+}
+
+
+.login-box {
+    text-align: center;
+}
+
+
+.instagram-written-text-logo{
+    width: 170px;
+    height: 50px;
+    padding-bottom: 25px;
+    cursor:default;!important;
+}
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+input {
+    margin: 6px 0;
+    padding: 10px;
+    width: 275px;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    background-color: #fafafa;
+}
+
+
+
+button {
+    background-color: #808DFB;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+    position: relative;
+}
+
+
+.divider span {
+    background: white;
+    padding: 0 10px;
+    color: #737373;
+}
+
+
+/*to make a line before and after or */
+.divider span::before{
+    content:"";
+    height: 2px;
+    width: 120px;
+    background-color: #DBDBDB;
+    position: absolute;
+    right: 0;
+    top:50%;
+}
+
+
+.divider span::after{
+    content:"";
+    height: 2px;
+    width: 120px;
+    background-color: #DBDBDB;
+    position: absolute;
+    left: 0;
+    top:50%;/*to make the line in the center of or span*/
+}
+
+
+.forgot {
+    display: block;
+    margin: 12px 0;
+    font-size: 14px;
+    color: #0c1014;
+    text-decoration: none;
+}
+
+.forgot:hover{
+    text-decoration: underline;
+}
+
+.signup {
+    font-size: 14px;
+    margin-top: 20px;
+    padding-top: 40px;
+}
+
+.signup a {
+    color: #808DFB;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #8e8e8e;
+    font-size: 12px;
+}
+
+
+
+.meta-info {
+    margin-top: 10px;
+    color: #8e8e8e;
+    font-size: 12px;
+}
+
