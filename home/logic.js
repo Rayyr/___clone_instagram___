@@ -138,3 +138,64 @@ storyModals.forEach(modal => {
         }
     });
 });
+
+
+
+
+
+//for create btn
+<!-- ✅ JavaScript -->
+
+const createDialog = document.getElementById("createDialog");
+const openCreateDialog = document.getElementById("openCreateDialog");
+const closeBtn = document.querySelector(".close-btn");
+const fileInput = document.getElementById("fileInput");
+const dialogActions = document.getElementById("dialogActions");
+const fileName=document.getElementById("fileName");
+const captionInput=document.getElementById("captionInput");
+
+openCreateDialog.addEventListener("click", (e) => {
+    e.preventDefault();
+    document.body.style.overflow='hidden';
+    createDialog.showModal();
+});
+
+closeBtn.addEventListener("click", () => {
+
+    captionInput.value="";
+    dialogActions.style.display = 'none';
+    fileName.textContent="No file chosen";
+    document.body.style.overflow='auto';
+    createDialog.close();
+});
+
+
+createDialog.addEventListener("click", (event) => {
+    // event.target === dialog means the click is on the backdrop, not inside the box
+    if (event.target === createDialog) {
+        captionInput.value="";
+        dialogActions.style.display = 'none';
+        fileName.textContent="No file chosen";
+        document.body.style.overflow = "auto"; // restore page scroll if you disabled it
+        createDialog.close();
+    }
+});
+
+fileInput.addEventListener('change', function(event) {
+    if (this.files.length > 0) {
+        // Simply show the Share button without preview
+        dialogActions.style.display = 'flex';
+        fileName.textContent=this.files[0].name;
+    }
+    else
+    {
+        captionInput.value="";
+        dialogActions.style.display = 'none';
+        fileName.textContent="No file chosen";
+    }
+});
+
+//display an alert msg after puplishing the post
+document.querySelector('.create-post-form').addEventListener('submit', function(ev) {
+    alert("The post has been posted successfully!");
+});

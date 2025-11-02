@@ -503,7 +503,7 @@ body {
     font-size: 1.5rem;
     font-weight: 600;
     border-bottom: 1px solid #e0e0e0;
-    background: #fafafa;
+    background: white;
     border-radius: 12px 12px 0 0;
 }
 
@@ -523,7 +523,7 @@ body {
 .likeCloseDialog {
     width: 100%;
     padding: 15px;
-    background: #fafafa;
+    background: white;
     border: none;
     border-top: 1px solid #e0e0e0;
     font-size: 0.95rem;
@@ -664,7 +664,7 @@ body {
     font-size: 1.5rem;
     font-weight: 600;
     border-bottom: 1px solid #e0e0e0;
-    background: #fafafa;
+    background: white;
     border-radius: 12px 12px 0 0;
 }
 
@@ -738,7 +738,7 @@ body {
 .closeDialog {
     width: 100%;
     padding: 15px;
-    background: #fafafa;
+    background:white;
     border: none;
     border-top: 1px solid #e0e0e0;
     font-size: 0.95rem;
@@ -896,7 +896,3 @@ body {
     outline: none;
 }
 
-/*hhhhhhhhhhhhhhhhhhhhhh*/
-.save-form{
-    display: inline !important;
-}

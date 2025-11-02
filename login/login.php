@@ -58,7 +58,7 @@ if(isset($_POST['submit'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Login</title>
+    <title>Instagram &bull; Login</title>
     <link rel="icon" href="../assets/login_register_page_logos/insta_icon.ico">
     <link rel="stylesheet" href="login_style.css">
 </head>
