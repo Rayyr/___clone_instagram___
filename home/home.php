@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 // الاتصال بقاعدة البيانات
 $conn = mysqli_connect('localhost','root','','mini_instagram');
 if (!$conn) {
@@ -12,9 +13,18 @@ $username = 'root';
 $password = '';
 $dbname = 'mini_instagram';
 
-// Get current user data(current logged in user logically)
+// Get current user data(current logged in user logically) from the session data
 $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-$user_id = $_SESSION['user_id'];
+$user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : -1;
+
+//impossilple to accur since we will be in this page from home page !!!
+if($user_id === -1) {
+// If no user_id provided, redirect to login or show error
+    header("Location: ../login/login.php");
+    exit;
+}
+
+//$user_id = $_SESSION['user_id']; due to the issue of phpsession sharing at teh same browser
 
 
 //follower id : the user who is follow : المتابيع
@@ -85,10 +95,10 @@ $posts = $stmt->fetchAll();
         <img class="instagram-written-text-logo" src="../assets/login_register_page_logos/instagram_text.png" alt="Instagram logo">
     </div>
     <ul class="nav-menu">
-        <li><a href="../home/home.php" ><i class="fa-solid fa-house" style="color: #000000;"></i> Home</a></li>
+        <li><a href="../home/home.php?user_id=<?php echo $user_id; ?>&user_we_will_visit=-1" ><i class="fa-solid fa-house" style="color: #000000;"></i> Home</a></li><!-- modofied 9-11 -->
         <li><a href="search.php"><i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i> Search</a></li>
         <li><a href="explore.php"><svg aria-label="Explore" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><title>Explore</title><polygon fill="none" points="13.941 13.953 7.581 16.424 10.06 10.056 16.42 7.585 13.941 13.953" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon><polygon fill-rule="evenodd" points="10.06 10.056 13.949 13.945 7.581 16.424 10.06 10.056"></polygon><circle cx="12.001" cy="12.005" fill="none" r="10.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle></svg> Explore</a></li>
-        <li><a href="reels.php"><svg aria-label="Reels" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><title>Reels</title><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="2.049" x2="21.95" y1="7.002" y2="7.002"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="13.504" x2="16.362" y1="2.001" y2="7.002"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="7.207" x2="10.002" y1="2.11" y2="7.002"></line><path d="M2 12.001v3.449c0 2.849.698 4.006 1.606 4.945.94.908 2.098 1.607 4.946 1.607h6.896c2.848 0 4.006-.699 4.946-1.607.908-.939 1.606-2.096 1.606-4.945V8.552c0-2.848-.698-4.006-1.606-4.945C19.454 2.699 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.546 2 5.704 2 8.552Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M9.763 17.664a.908.908 0 0 1-.454-.787V11.63a.909.909 0 0 1 1.364-.788l4.545 2.624a.909.909 0 0 1 0 1.575l-4.545 2.624a.91.91 0 0 1-.91 0Z" fill-rule="evenodd"></path></svg> Reels</a></li>
+        <li><a href="../profile/reels.php"><svg aria-label="Reels" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><title>Reels</title><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="2.049" x2="21.95" y1="7.002" y2="7.002"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="13.504" x2="16.362" y1="2.001" y2="7.002"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="7.207" x2="10.002" y1="2.11" y2="7.002"></line><path d="M2 12.001v3.449c0 2.849.698 4.006 1.606 4.945.94.908 2.098 1.607 4.946 1.607h6.896c2.848 0 4.006-.699 4.946-1.607.908-.939 1.606-2.096 1.606-4.945V8.552c0-2.848-.698-4.006-1.606-4.945C19.454 2.699 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.546 2 5.704 2 8.552Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M9.763 17.664a.908.908 0 0 1-.454-.787V11.63a.909.909 0 0 1 1.364-.788l4.545 2.624a.909.909 0 0 1 0 1.575l-4.545 2.624a.91.91 0 0 1-.91 0Z" fill-rule="evenodd"></path></svg> Reels</a></li>
         <li><a href="messages.php">✉️ Messages</a></li>
         <li><a href="notifications.php">🔔 Notifications</a></li>
         <li>
@@ -102,7 +112,7 @@ $posts = $stmt->fetchAll();
 
     <!-- ✅ Create Post Dialog -->
     <dialog id="createDialog" class="create-dialog">
-        <form method="POST" class="dialog-box create-post-form" action="../create_post/create_post.php"  enctype="multipart/form-data" id="createPostForm">
+        <form method="POST" class="dialog-box create-post-form" action="../create_post/create_post.php?user_id=<?php echo $user_id; ?>"  enctype="multipart/form-data" id="createPostForm"><!--modofied 9-11-->
             <div class="dialog-header">
                 <h3>Create new post</h3>
                 <button type="button" class="close-btn">&times;</button>
@@ -132,7 +142,7 @@ $posts = $stmt->fetchAll();
 
 
     <div class="profile-section">
-        <a href="../profile/profile.php?user_id=<?php echo $user_id; ?>" class="profile-link">
+        <a href="../profile/profile.php?user_id=<?php echo $user_id; ?>&user_we_will_visit=-1" class="profile-link">  <!-- modified 9-11 -->
             <img src="../profile_images/<?php echo htmlspecialchars($cu_result['profile_picture_url']); ?>"
                  alt="Profile" class="profile-pic" onerror="this.src='default.jpg'">
             <span>Profile</span>
@@ -200,15 +210,15 @@ $posts = $stmt->fetchAll();
         <div class="post">
             <!-- Post Header -->
             <div class="post-header">
-             <a href="../profile/profile.php?user_id=<?php echo $post['user_id']; ?>">
+             <a href="../profile/profile.php?user_id=<?php echo $user_id; ?>&user_we_will_visit=<?php echo $post['user_id']; ?>">
                  <img src="../profile_images/<?php echo htmlspecialchars($post['profile_picture_url']); ?>"
                      alt="<?php echo htmlspecialchars($post['username']); ?> profile image"
                         class="post-profile-pic" >
-             </a>
-                <a href="../profile/profile.php?user_id=<?php echo $post['user_id']; ?>"
+             </a> <!-- modified 9-11-->
+                <a href="../profile/profile.php?user_id=<?php echo $user_id; ?>&user_we_will_visit=<?php echo $post['user_id']; ?>"
                    class="post-username">
                     <?php echo htmlspecialchars($post['username']); ?>
-                </a>
+                </a><!-- modified 9-11-->
                 <!-- Post Time -->
                 <div class="post-time">
                     <?php
@@ -216,7 +226,8 @@ $posts = $stmt->fetchAll();
                     echo time_elapsed_string($post['created_at']);
                     ?>
                 </div>
-                <button class="post-more">⋯</button>  <!-- later -->
+<!--                <button class="post-more">⋯</button>-->
+                <!-- later -->
 
             </div>
 
@@ -232,9 +243,9 @@ $posts = $stmt->fetchAll();
             <?php endif; ?>
 
 
-<div class="wrapper-post-actions">
+          <div class="wrapper-post-actions">
             <!-- post action Form -->
-            <form  class="post-action-form" method="POST" action="../post_action_likes/post_action_likes.php">
+            <form  class="post-action-form" method="POST" action="../post_action_likes/post_action_likes.php?user_id=<?php echo $user_id; ?>">
 
                 <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
 
@@ -262,7 +273,7 @@ $posts = $stmt->fetchAll();
 
 
     <!-- save Form -->
-    <form  class="save-form" method="POST" action="../saved_posts/saved_posts.php">
+    <form  class="save-form" method="POST" action="../saved_posts/saved_posts.php?user_id=<?php echo $user_id?>">
         <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
 
         <button type="submit" class="post-save-action">
@@ -276,7 +287,6 @@ $posts = $stmt->fetchAll();
 
 
 </div>
-
 
 
 
@@ -305,12 +315,12 @@ $posts = $stmt->fetchAll();
                                 <div class="like-header">
 
                                     <!-- Make profile image clickable  for likers -->
-                                    <a href="../profile/profile.php?user_id=<?php echo $like['user_id']; ?>">
+                                    <a href="../profile/profile.php?user_id=<?php echo $user_id; ?>&user_we_will_visit=<?php echo $like['user_id']; ?>">    <!-- modified 9-11 -->
                                         <img src="../profile_images/<?php echo ($like['profile_picture_url']); ?>">
                                     </a>
 
                                     <!-- Make username clickable -->
-                                    <a href="../profile/profile.php?user_id=<?php echo $like['user_id']; ?>" class="username-link">
+                                    <a href="../profile/profile.php?user_id=<?php echo $user_id; ?>&user_we_will_visit=<?php echo $like['user_id']; ?>" class="username-link"><!-- modified 9-11 -->
                                         <strong><?php echo ($like['username']); ?></strong>
                                     </a>
                                     <span><?php echo ($like['liked_at']); ?></span>
@@ -323,8 +333,6 @@ $posts = $stmt->fetchAll();
 
                 <button class="likeCloseDialog">Close</button>
             </dialog>
-
-
 
 
 
@@ -366,12 +374,12 @@ $posts = $stmt->fetchAll();
                                 <div class="comment-header">
 
                                     <!-- Make profile image clickable  for commentors -->
-                                    <a href="../profile/profile.php?user_id=<?php echo $comment['user_id']; ?>">
+                                    <a href="../profile/profile.php?user_id=<?php echo $user_id; ?>&user_we_will_visit=<?php echo $comment['user_id']; ?>"><!-- modified 9-11 -->
                                         <img src="../profile_images/<?php echo ($comment['profile_picture_url']); ?>">
                                     </a>
 
                                     <!-- Make username clickable -->
-                                    <a href="../profile/profile.php?user_id=<?php echo $comment['user_id']; ?>" class="username-link">
+                                    <a href="../profile/profile.php?user_id=<?php echo $user_id; ?>&user_we_will_visit=<?php echo $comment['user_id']; ?>" class="username-link"><!-- modified 9-11 -->
                                     <strong><?php echo ($comment['username']); ?></strong>
                                     </a>
                                     <span><?php echo ($comment['created_at']); ?></span>
@@ -389,7 +397,7 @@ $posts = $stmt->fetchAll();
 
 
             <!-- Comment Form -->
-            <form  class="comment-form" method="POST" action="../post_comments/post_comments.php">
+            <form  class="comment-form" method="POST" action="../post_comments/post_comments.php?user_id=<?php echo $user_id; ?>;">
                 <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
                 <input  placeholder="Add a comment..." name="comment_content"
                        class="comment-input comment-input-<?php echo $post['post_id']; ?>" required>
@@ -402,6 +410,9 @@ $posts = $stmt->fetchAll();
         <?php endif; ?>
 
 
+
+
+        <?php if (!empty($posts)): ?>
         <!-- After all posts -->
         <div class="caught-up">
 
@@ -416,6 +427,7 @@ $posts = $stmt->fetchAll();
             <h3>You're All Caught Up</h3>
             <p>You've seen all posts from your followers !</p><!--may later to add explore page to see other posts -->
         </div>
+        <?php endif; ?>
 
 
 

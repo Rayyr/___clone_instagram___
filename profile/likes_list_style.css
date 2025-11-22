@@ -1,0 +1,156 @@
+
+/* likes Dialog Modal Styles */
+.myLikeDialog {
+    width: 90%;
+    max-width: 500px;
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background: white;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+
+/* Backdrop when modal is open */
+.myLikeDialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+/* Modal Header */
+.myLikeDialog h2 {
+    margin: 0;
+    padding: 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-bottom: 1px solid #e0e0e0;
+    background: white;
+    border-radius: 12px 12px 0 0;
+}
+
+
+.likeOpenDialog {
+    background: none;
+    border: none;
+    color: #8e8e8e;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.likeCloseDialog {
+    width: 100%;
+    padding: 15px;
+    background: white;
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #0095f6;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-radius: 0 0 12px 12px;
+}
+
+.likeCloseDialog:hover {
+    background: #f0f0f0;
+}
+
+
+
+/* likes Content Area */
+.likes-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 20px;
+    max-height: 400px;
+}
+
+/* Individual like */
+.like {
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.like:last-child {
+    border-bottom: none;
+}
+
+/* like Header with Profile Picture */
+.like-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.like-header img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid #e0e0e0;
+}
+
+.like-header strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #262626;
+    margin-right: auto;
+}
+
+.like-header span {
+    font-size: 0.8rem;
+    color: #8e8e8e;
+    flex-shrink: 0;
+}
+
+
+/* Scrollbar Styling */
+.likes-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.likes-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.likes-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.likes-content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+
+/* No likes Message */
+.likes-content > p {
+    text-align: center;
+    padding: 40px 20px;
+    color: #8e8e8e;
+    font-style: italic;
+    margin: 0;
+}
+
+/*Make profile picture clickable too */
+.like-header img {
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.like-header img:hover {
+    opacity: 0.8;
+}
+

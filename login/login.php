@@ -43,7 +43,8 @@ if(isset($_POST['submit'])){
             $_SESSION['profile_picture_url'] = $user['profile_picture_url'];
 
 
-            header('Location: ../home/home.php');
+
+            header('Location: ../home/home.php?user_id=' . $_SESSION['user_id'] . '&user_we_will_visit=-1');
             exit;
 
         } else {

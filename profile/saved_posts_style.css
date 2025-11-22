@@ -1,0 +1,236 @@
+/* Grid layout */
+.saved-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  margin-top: 20px;
+}
+
+
+.saved-post-item {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.saved-post-item img,
+.saved-post-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.saved-post-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.saved-post-item:hover .saved-post-overlay {
+    opacity: 1;
+}
+
+.saved-post-stats {
+    display: flex;
+    gap: 15px;
+    color: white;
+}
+
+
+
+.saved-share-btn {
+    background: #0095f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Modal dialog styles */
+.saved-modal-dialog {
+    width: 40%;
+    max-width: 800px;
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    background: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+
+
+.saved-modal-dialog h2{
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+
+
+}
+
+.saved-modal-dialog::backdrop {
+
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+}
+
+.saved-modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.saved-modal-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+/*icon close*/
+.saved-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.2s ease;
+    text-decoration: none;
+}
+
+.saved-modal-close:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+
+.saved-modal-body {
+
+    max-height: 80vh;
+}
+
+.saved-modal-image,
+.saved-modal-video {
+    width: 100%;
+    object-fit: contain;
+    background:  white;
+
+    padding-top: -55px;
+    padding-bottom: 25px;
+    padding-right: 30px;
+    padding-left: 30px;
+
+}
+
+.saved-modal-video {
+    max-height: 70vh;
+
+}
+
+.saved-video-icon {
+    position: absolute;
+    color: white;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+}
+
+
+.saved-video-icon .custom-icon {
+    background-color: white;
+    color: black;
+    border-radius: 30%;
+    width: 23px;
+    height: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    padding-left: 2px;
+}
+
+
+
+.saved-post-info {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.saved-post-caption {
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.saved-post-stats-modal {
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+    color: #8e8e8e;
+}
+
+
+
+
+/* saving Header with Profile Picture */
+.saving-header-saved {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.saving-header-saved img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid #e0e0e0;
+}
+
+.saving-header-saved strong {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #262626;
+    margin-right: auto;
+}
+
+.saving-header-saved span {
+    font-size: 0.8rem;
+    color: #8e8e8e;
+    flex-shrink: 0;
+}
+
+
+.saved-caption-text {
+    font-size: 14px;
+    word-wrap: break-word;
+    margin-left: 4px;
+}

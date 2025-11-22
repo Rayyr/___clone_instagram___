@@ -108,20 +108,30 @@ header {
 .profile-bio {
     margin-bottom: 10px;
     color: #262626;
+    font-size: 14px;
 }
 
 .profile-actions {
-    display: flex;
+    display: none;
     gap: 8px;
     margin-top: 20px;
+
 }
 
 .btn {
-    padding: 5px 9px;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
+    background-color: #f1f3f6; /* light gray background */
+    color: #000;              /* black text */
+    border: none;             /* no border */
+    padding: 10px 112px;       /* vertical and horizontal padding */
+    border-radius: 12px;      /* rounded corners */
+    font-weight: 600;         /* bold text */
+    cursor: pointer;          /* pointer on hover */
+    font-size: 15px;
+}
+
+.btn:hover{
+    background-color: #e8eaed; /* slightly darker on hover */
+
 }
 
 .btn-primary {
@@ -130,75 +140,7 @@ header {
     border: none;
 }
 
-.btn-secondary {
-    background-color: transparent;
-    border: 1px solid #E7EAEE;
-}
 
-/* Tabs */
-.tabs {
-    display: flex;
-    justify-content: center;
-    border-top: 1px solid #E7EAEE;
-    margin-bottom: 20px;
-}
-
-.tab {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 16px;
-    color: #8e8e8e;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-top: 1px solid transparent;
-    margin-top: -1px;
-}
-
-.tab.active {
-    color: #262626;
-    border-top: 1px solid #262626;
-}
-
-/* Empty State */
-.empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    max-width: 350px;
-    margin: 0 auto;
-}
-
-.camera-icon {
-    font-size: 62px;
-    color: #262626;
-    margin-bottom: 16px;
-}
-
-.empty-title {
-    font-size: 28px;
-    font-weight: 300;
-    margin-bottom: 16px;
-}
-
-.empty-description {
-    color: #8e8e8e;
-    font-size: 14px;
-    line-height: 18px;
-    margin-bottom: 24px;
-}
-
-.share-btn {
-    background-color: #E7EAEE;
-    color: black;
-    border: none;
-    border-radius: 4px;
-    padding: 5px 9px;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-}
 
 /* Footer */
 footer {

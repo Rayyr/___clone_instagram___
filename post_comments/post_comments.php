@@ -22,7 +22,8 @@ try {
 }
 
 //logged in user
-$user_id = $_SESSION['user_id'];
+//$user_id = $_SESSION['user_id'];
+$user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : -1;
 
 // Handle comment submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -42,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
             echo '<script>
-                window.location.href = "../home/home.php";  // JavaScript redirect
+            window.location.href = "../home/home.php?user_id=' . $user_id . '";  // JavaScript redirect
                  </script>';
             exit();
 

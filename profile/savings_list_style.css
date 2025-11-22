@@ -1,0 +1,156 @@
+
+/* likes Dialog Modal Styles */
+.mySaveDialog {
+    width: 90%;
+    max-width: 500px;
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background: white;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+
+/* Backdrop when modal is open */
+.mySaveDialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+/* Modal Header */
+.mySaveDialog h2 {
+    margin: 0;
+    padding: 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-bottom: 1px solid #e0e0e0;
+    background: white;
+    border-radius: 12px 12px 0 0;
+}
+
+
+.saveOpenDialog {
+    background: none;
+    border: none;
+    color: #8e8e8e;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.saveCloseDialog {
+    width: 100%;
+    padding: 15px;
+    background: white;
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #0095f6;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-radius: 0 0 12px 12px;
+}
+
+.saveCloseDialog:hover {
+    background: #f0f0f0;
+}
+
+
+
+/* savings Content Area */
+.savings-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 20px;
+    max-height: 400px;
+}
+
+/* Individual saving */
+.saving {
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.saving:last-child {
+    border-bottom: none;
+}
+
+/* saving Header with Profile Picture */
+.saving-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.saving-header img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid #e0e0e0;
+}
+
+.saving-header strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #262626;
+    margin-right: auto;
+}
+
+.saving-header span {
+    font-size: 0.8rem;
+    color: #8e8e8e;
+    flex-shrink: 0;
+}
+
+
+/* Scrollbar Styling */
+.savings-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.savings-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.savings-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.savings-content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+
+/* No savings Message */
+.savings-content > p {
+    text-align: center;
+    padding: 40px 20px;
+    color: #8e8e8e;
+    font-style: italic;
+    margin: 0;
+}
+
+/*Make profile picture clickable too */
+.saving-header img {
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.saving-header img:hover {
+    opacity: 0.8;
+}
+

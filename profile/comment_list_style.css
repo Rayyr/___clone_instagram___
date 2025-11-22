@@ -1,0 +1,220 @@
+/* Comments Section Styles */
+.comments-list {
+
+    max-height: 220px;   /*estimation for ~3 comments to be shown else there is a scroll bar wii be displayed*/
+    overflow-y: auto;
+
+}
+
+
+.comment {
+    padding: 12px 0;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.comment:last-child {
+    border-bottom: none;
+}
+
+
+
+.comment-content {
+    flex: 1;
+    min-width: 0; /* Prevents text overflow */
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    flex-wrap: nowrap;
+}
+
+
+.comment-time {
+    color: #8e8e8e;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.comment-text {
+    color: #262626;
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 4px;
+    word-break: break-word;
+    white-space: pre-line; /* Preserves line breaks */
+}
+
+
+.comment-actions {
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.reply-btn {
+    color: #8e8e8e;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.reply-btn:hover {
+    color: #0095f6;
+}
+
+/* No comments state */
+.no-comments {
+    text-align: center;
+    color: #8e8e8e;
+    font-size: 14px;
+    padding: 30px 0;
+    font-style: italic;
+}
+
+
+/* Scrollbar styling for comments list */
+.comments-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.comments-list::-webkit-scrollbar-track {
+    background: #fafafa;
+}
+
+.comments-list::-webkit-scrollbar-thumb {
+    background: #dbdbdb;
+    border-radius: 2px;
+}
+
+.comments-list::-webkit-scrollbar-thumb:hover {
+    background: #c7c7c7;
+}
+
+
+
+/* Animation for new comments */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+/* Loading state for comments */
+.comment-loading {
+    padding: 20px 0;
+    text-align: center;
+    color: #8e8e8e;
+    font-size: 14px;
+}
+
+.comment-loading::after {
+    content: '...';
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% {
+        color: rgba(0,0,0,0);
+        text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0);
+    }
+    40% {
+        color: #8e8e8e;
+        text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0);
+    }
+    60% {
+        text-shadow: .25em 0 0 #8e8e8e, .5em 0 0 rgba(0,0,0,0);
+    }
+    80%, 100% {
+        text-shadow: .25em 0 0 #8e8e8e, .5em 0 0 #8e8e8e;
+    }
+}
+
+/* Comment form styles */
+.comment-form {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-top: 1px solid #efefef;
+    gap: 12px;
+}
+
+.comment-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 8px 0;
+    background: transparent;
+    resize: none;
+    max-height: 80px;
+    line-height: 1.4;
+}
+
+.comment-input::placeholder {
+    color: #8e8e8e;
+}
+
+.comment-submit {
+    background: none;
+    border: none;
+    color: #0095f6;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    font-size: 14px;
+}
+
+.comment-submit:hover:not(:disabled) {
+    opacity: 1;
+}
+
+.comment-submit:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+/* Reply thread styles (if you implement nested comments) */
+.comment-reply {
+    margin-left: 44px;
+    padding-left: 12px;
+    border-left: 2px solid #efefef;
+}
+
+.comment-reply .avatar {
+    width: 24px;
+    height: 24px;
+}
+
+/* Highlight new comment */
+.comment.new-comment {
+    background: #f8f9fa;
+    margin: 0 -16px;
+    padding: 12px 16px;
+    animation: highlight 2s ease-in-out;
+}
+
+@keyframes highlight {
+    0% {
+        background: #e3f2fd;
+    }
+    100% {
+        background: #f8f9fa;
+    }
+}

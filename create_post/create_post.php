@@ -16,7 +16,19 @@ $dbname = 'mini_instagram';
 
 // Get current user data(current logged in user logically who make the post)
 $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-$user_id = $_SESSION['user_id'];
+//$user_id = $_SESSION['user_id'];
+
+
+//modified 9-11
+// Get user_id from URL parameter o
+$user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : -1;
+
+//impossilple to accur since we will be in this page from home page !!!
+if($user_id === -1) {
+// If no user_id provided, redirect to login or show error
+    header("Location: ../login/login.php");
+    exit;
+}
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -60,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                  </script>";
         }
 
-        header('Location: ../home/home.php');
+        header('Location: ../home/home.php?user_id=' . $user_id); //modified 9-11
         exit;
     }
 
