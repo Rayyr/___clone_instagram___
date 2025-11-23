@@ -81,11 +81,11 @@ if(isset($_POST['submit'])){
 
             <div class="divider"><span>OR</span></div>
 
-            <a href="../forget_password/forget_password.html" class="forgot">Forgot password?</a>
+            <a href="../forget_password/forget_password.php" class="forgot">Forgot password?</a>
 
             <div class="signup">
                 Don’t have an account?
-                <a href="../verify_email_when_sign_up/verify_email_when_sign_up.html">Sign up</a>
+                <a href="../verify_email_when_sign_up/verify_email_when_sign_up.php">Sign up</a>
             </div>
         </div>
     </div>
