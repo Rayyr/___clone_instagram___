@@ -37,8 +37,16 @@ if($user_id === -1) {
 //$followees->execute([$user_id]);
 //$followees_result = $followees->fetch();
 
+
 //get the followees'stories that the current logged-in user follows
-$query=$pdo->prepare("SELECT u.*,s.*
+$query=$pdo->prepare("SELECT u.*,s.*,
+                             CASE 
+                                    WHEN EXISTS (
+                                  SELECT * FROM story_views sv 
+                                  WHERE sv.story_id = s.story_id AND sv.viewer_id = ?
+                                  ) THEN 1 
+                                    ELSE 0 
+                                  END as is_viewed
                          FROM follows f 
                          JOIN users u ON f.followee_id = u.user_id
                          JOIN stories s ON u.user_id = s.user_id
@@ -47,8 +55,16 @@ $query=$pdo->prepare("SELECT u.*,s.*
                          ORDER BY s.created_at DESC ");
 //AND s.expires_at > NOW() useless since i have created such an event to check every hour about expiration time for each story
 //from nearer story to be ended to the newest order
-$query->execute([$user_id]);
+$query->execute([$user_id, $user_id]);
 $followees_stories = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+
+
+/////////////////////////
+
+//////////////////////////
 
 //current logged in user
 $cu = $pdo->prepare("SELECT * FROM users WHERE user_id = ?");
@@ -84,6 +100,9 @@ $posts = $stmt->fetchAll();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="create_post_btn_style.css">
+    <link rel="stylesheet" href="../story/story_style.css">
+    <link rel="stylesheet" href="../story/create_story_style.css">
+
     <title>Instagram &bull; Home</title>
 </head>
 <body>
@@ -97,8 +116,9 @@ $posts = $stmt->fetchAll();
     <ul class="nav-menu">
         <li><a href="../home/home.php?user_id=<?php echo $user_id; ?>&user_we_will_visit=-1" ><i class="fa-solid fa-house" style="color: #000000;"></i> Home</a></li><!-- modofied 9-11 -->
         <li><a href="search.php"><i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i> Search</a></li>
-        <li><a href="explore.php"><svg aria-label="Explore" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><title>Explore</title><polygon fill="none" points="13.941 13.953 7.581 16.424 10.06 10.056 16.42 7.585 13.941 13.953" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon><polygon fill-rule="evenodd" points="10.06 10.056 13.949 13.945 7.581 16.424 10.06 10.056"></polygon><circle cx="12.001" cy="12.005" fill="none" r="10.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle></svg> Explore</a></li>
+        <li><a href="../explore_users/explore_users.php?user_id=<?php echo $user_id?>"><i class="fa-solid fa-users" style="color: #000000;"></i> Explore</a></li>
         <li><a href="../profile/reels.php"><svg aria-label="Reels" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><title>Reels</title><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="2.049" x2="21.95" y1="7.002" y2="7.002"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="13.504" x2="16.362" y1="2.001" y2="7.002"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="7.207" x2="10.002" y1="2.11" y2="7.002"></line><path d="M2 12.001v3.449c0 2.849.698 4.006 1.606 4.945.94.908 2.098 1.607 4.946 1.607h6.896c2.848 0 4.006-.699 4.946-1.607.908-.939 1.606-2.096 1.606-4.945V8.552c0-2.848-.698-4.006-1.606-4.945C19.454 2.699 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.546 2 5.704 2 8.552Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M9.763 17.664a.908.908 0 0 1-.454-.787V11.63a.909.909 0 0 1 1.364-.788l4.545 2.624a.909.909 0 0 1 0 1.575l-4.545 2.624a.91.91 0 0 1-.91 0Z" fill-rule="evenodd"></path></svg> Reels</a></li>
+<!--        <li><a href="../story/user_stories.php">✉️ Stories</a></li>-->
         <li><a href="messages.php">✉️ Messages</a></li>
         <li><a href="notifications.php">🔔 Notifications</a></li>
         <li>
@@ -141,12 +161,25 @@ $posts = $stmt->fetchAll();
 
 
 
+
     <div class="profile-section">
+
+       <!--profile-->
         <a href="../profile/profile.php?user_id=<?php echo $user_id; ?>&user_we_will_visit=-1" class="profile-link">  <!-- modified 9-11 -->
             <img src="../profile_images/<?php echo htmlspecialchars($cu_result['profile_picture_url']); ?>"
-                 alt="Profile" class="profile-pic" onerror="this.src='default.jpg'">
+                 alt="Profile" class="profile-pic"">
             <span>Profile</span>
         </a>
+
+
+        <!--logout-->
+        <div style="margin-top: 7px;margin-left: 3px;">
+            <a href="../login/login.php" class="profile-link">  <!-- modified 9-11 -->
+                <i class="fas fa-sign-out-alt fa-lg" title="logout" style="color: #000000;"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+
     </div>
 </div>
 
@@ -157,7 +190,7 @@ $posts = $stmt->fetchAll();
     <div class="stories">
 
         <!-- logged in user story ( to add story only ) -->
-        <button   class="story story-handler-btn">
+        <button class="current-user-story story story-handler-btn">
             <div class="story-image-container">
             <img src="../profile_images/<?php echo htmlspecialchars($cu_result['profile_picture_url']); ?>"
                  alt="Your story" class="story-pic">
@@ -166,32 +199,104 @@ $posts = $stmt->fetchAll();
                     <i class="fa-solid fa-plus"></i>
                  </div>
             </div>
-            <span class="story-username">Your story</span>
+            <span class="current-user-story story-username">Your story</span>
         </button>
 
 
 
 
         <?php foreach ($followees_stories as $followee_story): ?>
-            <button class="story story-handler-btn ">
+
+            <?php if($followee_story['is_viewed'] == 0): ?> <!--not viewed yet-->
+                <button class="story story-handler-btn"
+                    data-story-id="<?php echo $followee_story['story_id']; ?>"
+                    data-user-id="<?php echo $followee_story['user_id']; ?>"
+                        data-viewer-id="<?php echo $user_id; ?>"
+                    data-username="<?php echo htmlspecialchars($followee_story['username']); ?>"
+                    data-profile-pic="../profile_images/<?php echo htmlspecialchars($followee_story['profile_picture_url']); ?>"
+                    data-story-media="../story_images/<?php echo htmlspecialchars($followee_story['media_url']); ?>">
 
                 <div class="story-image-container">
                     <img src="../profile_images/<?php echo htmlspecialchars($followee_story['profile_picture_url']); ?>"
                          alt="Your story" class="story-pic">
-
-                    <div class="add-story-overlay">
-                        <i class="fa-solid fa-plus"></i>
-                    </div>
                 </div>
 
-                <span class="story-username"><?php echo $followee_story['username']?></span>
-            </button>
+                    <span class="story-username" data-user-id="<?php echo $followee_story['user_id']; ?>" data-viewer-id="<?php echo $user_id; ?>">
+                        <?php echo $followee_story['username']?>
+                    </span>
 
 
 
+                </button>
+
+
+        <?php endif; ?>
         <?php endforeach; ?>
 
+
     </div>
+
+
+
+    <!-- ✅ Create Story Dialog -->
+    <dialog id="createStoryDialog" class="create-story-dialog">
+        <form method="POST" class="dialog-story-box create-story-form" action="../story/create_story.php?user_id=<?php echo $user_id; ?>" enctype="multipart/form-data" id="createStoryForm">
+            <div class="dialog-story-header">
+                <h3>Create new story</h3>
+                <button type="button" class="close-story-btn">&times;</button>
+            </div>
+
+            <div class="upload-story-area" id="uploadStoryArea">
+
+                <svg aria-label="Icon" class="x1lliihq x1n2onr6 x5n08af" height="77" role="img" viewBox="0 0 97.6 77.3" width="96"><title>Icon to represent media such as images or videos</title><path d="M16.3 24h.3c2.8-.2 4.9-2.6 4.8-5.4-.2-2.8-2.6-4.9-5.4-4.8s-4.9 2.6-4.8 5.4c.1 2.7 2.4 4.8 5.1 4.8zm-2.4-7.2c.5-.6 1.3-1 2.1-1h.2c1.7 0 3.1 1.4 3.1 3.1 0 1.7-1.4 3.1-3.1 3.1-1.7 0-3.1-1.4-3.1-3.1 0-.8.3-1.5.8-2.1z" fill="currentColor"></path><path d="M84.7 18.4 58 16.9l-.2-3c-.3-5.7-5.2-10.1-11-9.8L12.9 6c-5.7.3-10.1 5.3-9.8 11L5 51v.8c.7 5.2 5.1 9.1 10.3 9.1h.6l21.7-1.2v.6c-.3 5.7 4 10.7 9.8 11l34 2h.6c5.5 0 10.1-4.3 10.4-9.8l2-34c.4-5.8-4-10.7-9.7-11.1zM7.2 10.8C8.7 9.1 10.8 8.1 13 8l34-1.9c4.6-.3 8.6 3.3 8.9 7.9l.2 2.8-5.3-.3c-5.7-.3-10.7 4-11 9.8l-.6 9.5-9.5 10.7c-.2.3-.6.4-1 .5-.4 0-.7-.1-1-.4l-7.8-7c-1.4-1.3-3.5-1.1-4.8.3L7 49 5.2 17c-.2-2.3.6-4.5 2-6.2zm8.7 48c-4.3.2-8.1-2.8-8.8-7.1l9.4-10.5c.2-.3.6-.4 1-.5.4 0 .7.1 1 .4l7.8 7c.7.6 1.6.9 2.5.9.9 0 1.7-.5 2.3-1.1l7.8-8.8-1.1 18.6-21.9 1.1zm76.5-29.5-2 34c-.3 4.6-4.3 8.2-8.9 7.9l-34-2c-4.6-.3-8.2-4.3-7.9-8.9l2-34c.3-4.4 3.9-7.9 8.4-7.9h.5l34 2c4.7.3 8.2 4.3 7.9 8.9z" fill="currentColor"></path><path d="M78.2 41.6 61.3 30.5c-2.1-1.4-4.9-.8-6.2 1.3-.4.7-.7 1.4-.7 2.2l-1.2 20.1c-.1 2.5 1.7 4.6 4.2 4.8h.3c.7 0 1.4-.2 2-.5l18-9c2.2-1.1 3.1-3.8 2-6-.4-.7-.9-1.3-1.5-1.8zm-1.4 6-18 9c-.4.2-.8.3-1.3.3-.4 0-.9-.2-1.2-.4-.7-.5-1.2-1.3-1.1-2.2l1.2-20.1c.1-.9.6-1.7 1.4-2.1.8-.4 1.7-.3 2.5.1L77 43.3c1.2.8 1.5 2.3.7 3.4-.2.4-.5.7-.9.9z" fill="currentColor"></path></svg>
+
+                <p>Drag photo here</p>
+                <label for="fileStoryInput" class="upload-story-btn">Select From Computer</label>
+                <!-- Placeholder for displaying selected file name -->
+                <p id="fileStoryName" class="file-story-name">No image chosen</p>
+                <input class="upload-story-btn" type="file" id="fileStoryInput" name="media" accept="image/*" hidden >
+            </div>
+
+            <!-- Added action buttons -->
+            <div class="dialog-actions" id="storyDialogActions"  style="display: none" >
+                <button type="submit" class="share-story-btn" >Share Story</button>
+            </div>
+        </form>
+    </dialog>
+
+
+
+<!--     Story Viewer Dialog (Single Instance) -->
+    <dialog id="storyDialog" class="story-dialog">
+        <div class="story-dialog-content">
+            Header
+            <div class="story-header">
+                <div class="story-user-info">
+                    <img id="storyUserAvatar" src="" alt="" class="story-avatar">
+                    <span id="storyUsername" class="story-username-header"></span>
+                </div>
+                <button class="close-story-btn" id="closeStoryBtn">&times;</button>
+            </div>
+
+<!--              Story Content -->
+            <div class="story-media-container">
+                <img id="storyMedia" src=""  alt="Story" class="story-media">
+            </div>
+
+
+<!--              Progress Bar -->
+            <div class="story-progress-container">
+                <div class="story-progress-bar">
+                    <div class="story-progress-fill"></div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+
+
+
+
 
 
 
@@ -202,7 +307,7 @@ $posts = $stmt->fetchAll();
         <div style="text-align: center; padding: 40px; color: #8e8e8e;">
             <h3>No posts yet</h3>
             <p>Follow people to see their posts here!</p>
-            <a href="explore.php" style="color: #0095f6; text-decoration: none;">Explore users</a>   <!-- later -->
+            <a href="../explore_users/explore_users.php?user_id=<?php echo $user_id?>" style="color: #0095f6; text-decoration: none;">Explore users</a>   <!-- later -->
         </div>
 
         <?php else: ?>
@@ -341,7 +446,7 @@ $posts = $stmt->fetchAll();
 
             <!-- Post Caption -->
             <div class="post-caption">
-                            <span class="caption-username">
+                            <span class="caption-username" onclick='window.location.href = `../profile/profile.php?user_id=<?php echo $user_id; ?>&user_we_will_visit=<?php echo $post['user_id']; ?>`'>
                                 <?php echo htmlspecialchars($post['username']); ?>
                             </span>
                 <?php echo htmlspecialchars($post['caption']); ?>
@@ -582,6 +687,19 @@ return $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
+
+<?php
+function changeStoryToViewed($pdo, $story_id, $user_id) {
+
+        $query = $pdo->prepare("INSERT INTO story_views (story_id, viewer_id, viewed_at) 
+                                VALUES (?, ?, NOW()) ");
+        $query->execute([$story_id, $user_id]);
+}
+?>
+
+
+
 <script src="logic.js"></script>
+<script src="../story/story_dialog_logic.js"></script>
 </body>
 </html>

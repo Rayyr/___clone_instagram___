@@ -160,6 +160,8 @@ body {
     display: flex;
     gap: 15px;
     overflow-x: auto;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #c7c7c7 transparent; /* Firefox */
 }
 
 .story {
@@ -321,6 +323,11 @@ body {
 .caption-username {
     font-weight: 600;
     margin-right: 4px;
+}
+
+.post-caption .caption-username:hover{
+    color:#0095f6;
+    cursor: pointer;
 }
 
 .post-comments {

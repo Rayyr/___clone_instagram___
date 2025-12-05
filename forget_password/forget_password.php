@@ -23,8 +23,9 @@
         </p>
 
         <div class="input-group">
-            <form method="post" >
-            <input type="password" name="password" placeholder="New Password" required>
+            <form method="post" action="handle_forget_password.php">
+                <input type="text" name="phone_number" placeholder="Phone Number" minlength="6" maxlength="6" required>
+            <input type="password" name="password" placeholder="New Password" minlength="6" maxlength="6" required>
                 <div class="change_btn">
                     <button class="btn" type="submit">Change Password</button>
                 </div>
@@ -34,7 +35,7 @@
 
 
         <div class="back_btn">
-            <button class="btn" onclick="window.location.href='../login/login.html'">Back to login</button>
+            <button class="btn" onclick="window.location.href='../login/login.php'">Back to login</button>
         </div>
 
     </div>
@@ -47,6 +48,6 @@
 
 </div>
 
-<script src="logic.js"></script>
+
 </body>
 </html>

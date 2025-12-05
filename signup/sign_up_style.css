@@ -36,7 +36,7 @@ body {
 }
 
 
-form input {
+form input{
     width: 100%;
     padding: 9px;
     margin-bottom: 8px;
@@ -47,7 +47,7 @@ form input {
 }
 
 .signup-btn {
-    width: 100%;
+    width: 369.9px;
     background-color: #0095f6;
     color: white;
     border: none;
@@ -58,24 +58,12 @@ form input {
     margin-top: 10px;
 }
 
+
 .signup-btn:hover {
     background-color: #0078cc;
 }
 
-.terms {
-    font-size: 12px;
-    color: #8e8e8e;
-    margin: 10px 0;
-}
 
-.terms a {
-    text-decoration: none;
-    color: #00376b;
-}
-
-.terms a:hover {
-    text-decoration: underline;
-}
 
 .login-box {
     background-color: white;
@@ -85,6 +73,8 @@ form input {
     border-radius: 8px;
     font-size: 14px;
 }
+
+
 .login-box {
     background-color: white;
     border: 1px solid #dbdbdb;
@@ -100,6 +90,3 @@ form input {
     font-weight: bold;
 }
 
-.login-box a:hover {
-    text-decoration: underline;
-}

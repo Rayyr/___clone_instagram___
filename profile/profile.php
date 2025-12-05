@@ -174,7 +174,6 @@ ORDER BY pc.created_at ASC");
 
         <div class="nav-icons">
             <i class="fas fa-home"></i>
-            <i class="far fa-heart"></i>
         </div>
     </div>
 </header>
@@ -200,7 +199,10 @@ ORDER BY pc.created_at ASC");
             <p class="profile-bio"><?php echo getBio($user) ?></p>
             <div class="profile-actions" id="editProfile">
                 <button onclick="window.location.href='../edit_profile/edit_profile.php?user_id=<?php echo $user_id; ?>'" class="btn btn-primary">Edit Profile</button>
+                <button onclick="window.location.href='../story/archive_stories.php?user_id=<?php echo $user_id; ?>'" class="btn btn-primary">View Archive</button>
             </div>
+
+
         </div>
     </section>
 

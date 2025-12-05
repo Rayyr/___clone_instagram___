@@ -1,0 +1,105 @@
+
+.create-story-dialog {
+    border: none;
+    border-radius: 12px;
+    width: 420px;
+    max-width: 90%;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    /* NEW: force stable centering */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+
+.create-story-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+.dialog-story-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    justify-content: center;
+}
+
+.dialog-story-header {
+    width: 100%;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.dialog-story-header h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.close-story-btn {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    border: none;
+    background: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.upload-story-area {
+    padding: 40px 20px;
+    text-align: center;
+
+}
+
+.upload-story-area svg {
+    margin-bottom: 15px;
+}
+
+.upload-story-area p {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.upload-story-btn {
+    background-color: #0095f6;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.upload-story-btn:hover {
+    background-color: #0077cc;
+}
+
+.share-story-btn {
+    background: #0095f6;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.share-story-btn:hover {
+    background-color: #0077cc;
+}
+
+.file-story-name{
+    margin-top: 20px;
+    font-size: 15px;
+    color: #333;
+}
+

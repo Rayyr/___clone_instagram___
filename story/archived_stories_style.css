@@ -1,0 +1,218 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: white;
+    color: #262626;
+    line-height: 1.4;
+}
+
+.container {
+    max-width: 935px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+
+header .archive-header {
+    display: flex;
+    margin-top: 30px;
+
+}
+
+.archive-header span{
+    color:black;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.archive-header svg{
+   margin-top: 4px;
+ margin-right: 15px;
+}
+
+.archive-header span:hover{
+    cursor: pointer;
+}
+
+.archive-header svg:hover{
+    cursor: pointer;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #dbdbdb;
+    margin-top: 20px;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #8e8e8e;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-top: -1px;
+}
+
+.tab.active {
+    color: #262626;
+    border-bottom-color: #262626;
+    border-bottom-width: thin ;
+}
+
+
+.tab-content.active {
+    display: block;
+}
+
+.tab span{
+    font-size: 14px;
+}
+
+.tab-content .msg{
+    color:rgba(115,115,115);
+    font-size: 12px;
+    margin-top: 35px;
+    margin-bottom: 30px;
+
+}
+
+.no-stories {
+    text-align: center;
+    color:rgba(115,115,115);
+    font-size: 26px;
+    padding: 30px 0;
+    font-style: italic;
+}
+
+/* Stories Grid Styles */
+.stories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    margin-top: 20px;
+}
+
+.story-item {
+    aspect-ratio: 1;
+
+    position: relative;
+    cursor: pointer;
+}
+
+.story-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+}
+
+.story-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+}
+
+.story-item:hover .story-overlay {
+    display: flex;
+}
+
+.story-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.story-stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.stories-word{
+    font-size: 12px;
+}
+
+
+
+
+
+/* Footer */
+footer {
+    margin-top: 80px;
+    padding: 20px 0;
+    text-align: center;
+    color: #8e8e8e;
+    font-size: 12px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.footer-links a {
+    color: #8e8e8e;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+.date-card {
+    position: absolute;
+    top: 15px;
+    left: 8px;
+    background: white;
+    padding: 5px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.date-card .day {
+    font-size: 15px;
+    font-weight: bolder;
+    color: black;
+}
+
+
+.date-card .month {
+    font-size: 14px;
+    color: black;
+    text-transform: capitalize;
+}
+
+.date-card .year {
+    font-size: 12px;
+    color: black;
+}

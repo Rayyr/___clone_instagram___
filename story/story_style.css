@@ -1,0 +1,341 @@
+/* Stories Container */
+.stories-container {
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    overflow-x: auto;
+    background: #ffffff;
+    border-bottom: 1px solid #dbdbdb;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.stories-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+/* Story Button */
+.story {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s ease;
+}
+
+.story:hover {
+    transform: scale(1.05);
+}
+
+.story-image-container {
+    position: relative;
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.story-pic {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    background: #fafafa;
+}
+
+.add-story-overlay {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    background: black;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 10px;
+}
+
+
+.story-username {
+    font-size: 13px;
+    font-weight:550;
+    color: #262626;
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.story-username:hover{
+    color:#0095f6;
+}
+
+
+/* Story Dialog */
+.story-dialog {
+    border: none;
+    border-radius: 16px;
+    padding: 0;
+    background: transparent;
+    width: 400px;
+    max-width: 90vw;
+    height: 700px;
+    max-height: 90vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+}
+
+.story-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(0.7px);
+    -webkit-backdrop-filter: blur(0.7px);
+}
+
+.story-dialog-content {
+    position: relative;
+    background: #000;
+    border-radius: 16px;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Story Header */
+.story-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+}
+
+.story-user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.story-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #0095f6;
+    object-fit: cover;
+    background: #333;
+}
+
+.story-username-header {
+    font-weight: 600;
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.close-story-btn {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.close-story-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* Story Media Container */
+.story-media-container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+
+.story-media {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Progress Bar */
+.story-progress-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    z-index: 15;
+    pointer-events: none;
+}
+
+.story-progress-bar {
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.story-progress-fill {
+    height: 100%;
+    background: white;
+    border-radius: 2px;
+    width: 0%;
+    transition: width linear;
+}
+
+/* Navigation Arrows (Optional) */
+.story-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background-color 0.2s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.story-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.story-prev-btn {
+    left: 16px;
+}
+
+.story-next-btn {
+    right: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .story-dialog {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+
+    .story-dialog-content {
+        border-radius: 0;
+    }
+
+    .stories-container {
+        padding: 8px;
+        gap: 12px;
+    }
+
+    .story-image-container {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .story-image-container {
+        width: 56px;
+        height: 56px;
+    }
+
+    .story-username {
+        font-size: 11px;
+        max-width: 60px;
+    }
+}
+
+/* Loading State */
+.story-media.loading {
+    opacity: 0.5;
+    filter: blur(2px);
+}
+
+/* Error State */
+.story-media.error {
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Animation for dialog opening */
+@keyframes storyDialogOpen {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.story-dialog[open] {
+    animation: storyDialogOpen 0.3s ease-out;
+}
+
+/* Animation for progress bar */
+@keyframes storyProgress {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.story-progress-fill.animating {
+    animation: storyProgress 5s linear forwards;
+}

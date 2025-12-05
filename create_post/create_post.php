@@ -52,14 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
         try {
-        $stmt = $pdo->prepare("INSERT INTO posts 
-               (user_id, media_url, caption, likes_count, comments_count, created_at, media_type, savings_count) VALUES (? , ? , ? , 0, 0, NOW(), ?, 0)");
-
+        $stmt = $pdo->prepare("INSERT INTO posts (user_id, media_url, caption, likes_count, comments_count, created_at, media_type, savings_count) VALUES (? , ? , ? , 0, 0, NOW(), ?, 0)");
         $stmt->execute([$user_id, $fileName, $post_caption, $mainType]);
-
-            echo "<script>
-                  alert('The post has been posted successfully!');
-                 </script>";
         }
         catch (PDOException $e) {
             // Handle error - log it and show user message
