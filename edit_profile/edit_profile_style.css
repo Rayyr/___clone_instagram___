@@ -6,7 +6,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #fafafa;
+    background-color: white;
     color: #262626;
     line-height: 1.4;
 }
@@ -15,13 +15,17 @@ body {
     max-width: 935px;
     margin: 30px auto;
     background: white;
-    border: 1px solid #dbdbdb;
-    border-radius: 3px;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .edit-profile-header {
     padding: 16px;
-    border-bottom: 1px solid #dbdbdb;
+    border-bottom: 1px solid #ddd;
 }
 
 .edit-profile-title {
@@ -168,4 +172,66 @@ textarea {
     background: #b2dffc;
     cursor: default;
 }
+
+header{
+    margin-left: 300px;
+    margin-bottom: 100px;
+
+}
+
+header .archive-header {
+    display: flex;
+    margin-top: 30px;
+
+}
+
+.archive-header span{
+    color:black;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.archive-header svg{
+    margin-top: 4px;
+    margin-right: 15px;
+}
+
+.archive-header span:hover{
+    cursor: pointer;
+}
+
+.archive-header svg:hover{
+    cursor: pointer;
+}
+
+
+
+
+
+
+/* Footer */
+footer {
+    margin-top: 80px;
+    padding: 20px 0;
+    text-align: center;
+    color: #8e8e8e;
+    font-size: 12px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.footer-links a {
+    color: #8e8e8e;
+    text-decoration: none;
+}
+
+
+
+
 

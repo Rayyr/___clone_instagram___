@@ -101,7 +101,6 @@ function getStoryViewersCount($story_id,$pdo)
 
     <!-- Tabs -->
     <section class="tabs">
-
         <div class="tab active" data-tab="saved">
             <div class="html-div xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x9f619 xjbqb8w x78zum5 x15mokao x1ga7v0g x16uus16 xbiv7yw x1n2onr6 x1plvlek xryxfnj x1c4vz4f x2lah0s x1q0g3np xqjyukv x6s0dn4 x1oa3qoh x1nhvcw1">
                 <svg aria-label="" class="x1lliihq x1n2onr6 x5n08af" fill="black" height="15" role="img" viewBox="0 0 24 24" width="15"><title></title>

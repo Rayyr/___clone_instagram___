@@ -117,6 +117,15 @@ $other_users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </div>
 
+
+<!-- Footer -->
+<footer>
+    <div class="meta-info">
+        English © 2025 Instagram from Meta
+    </div>
+</footer>
+
+
 </body>
 </html>
 

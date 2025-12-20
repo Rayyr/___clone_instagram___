@@ -28,6 +28,14 @@
 
     </div>
 
+
+
+
+    <div class="footer">
+        <div class="meta-info">
+            © 2025 Instagram from Meta
+        </div>
+    </div>
 </div>
 
 

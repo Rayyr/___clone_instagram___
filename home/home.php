@@ -79,8 +79,11 @@ $stmt = $pdo->prepare("
     WHERE p.user_id IN (
         SELECT followee_id FROM follows WHERE follower_id = ?
     ) 
+      
+    AND p.created_at >= DATE_SUB(NOW(), INTERVAL 2 DAY)  
     ORDER BY p.created_at DESC
 ");
+//this line 6-12 modified ( and p.created_at ....)
 //descending order , the 1st comment is the newest
 $stmt->execute([$user_id]);
 $posts = $stmt->fetchAll();
@@ -115,13 +118,8 @@ $posts = $stmt->fetchAll();
     </div>
     <ul class="nav-menu">
         <li><a href="../home/home.php?user_id=<?php echo $user_id; ?>&user_we_will_visit=-1" ><i class="fa-solid fa-house" style="color: #000000;"></i> Home</a></li><!-- modofied 9-11 -->
-        <li><a href="search.php"><i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i> Search</a></li>
-        <li><a href="../explore_users/explore_users.php?user_id=<?php echo $user_id?>"><i class="fa-solid fa-users" style="color: #000000;"></i> Explore</a></li>
-        <li><a href="../profile/reels.php"><svg aria-label="Reels" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><title>Reels</title><line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="2.049" x2="21.95" y1="7.002" y2="7.002"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="13.504" x2="16.362" y1="2.001" y2="7.002"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="7.207" x2="10.002" y1="2.11" y2="7.002"></line><path d="M2 12.001v3.449c0 2.849.698 4.006 1.606 4.945.94.908 2.098 1.607 4.946 1.607h6.896c2.848 0 4.006-.699 4.946-1.607.908-.939 1.606-2.096 1.606-4.945V8.552c0-2.848-.698-4.006-1.606-4.945C19.454 2.699 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.546 2 5.704 2 8.552Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M9.763 17.664a.908.908 0 0 1-.454-.787V11.63a.909.909 0 0 1 1.364-.788l4.545 2.624a.909.909 0 0 1 0 1.575l-4.545 2.624a.91.91 0 0 1-.91 0Z" fill-rule="evenodd"></path></svg> Reels</a></li>
-<!--        <li><a href="../story/user_stories.php">✉️ Stories</a></li>-->
-        <li><a href="messages.php">✉️ Messages</a></li>
-        <li><a href="notifications.php">🔔 Notifications</a></li>
-        <li>
+         <li><a href="../explore_users/explore_users.php?user_id=<?php echo $user_id?>"><i class="fa-solid fa-users" style="color: #000000;"></i> Explore</a></li>
+            <li>
             <a href="#" id="openCreateDialog">
                 <i class="fa-solid fa-plus fa-xl" style="color: #000000;"></i>
                 <span>Create</span>
@@ -226,7 +224,6 @@ $posts = $stmt->fetchAll();
                     </span>
 
 
-
                 </button>
 
 
@@ -296,22 +293,21 @@ $posts = $stmt->fetchAll();
 
 
 
+<!--current user has no followings ( he not follow any user !)-->
+    <?php if ($cu_result['following_count'] == 0): ?>
+    <div style="text-align: center; padding: 40px; color: #8e8e8e;">
+        <h3>No posts yet</h3>
+        <p>Follow people to see their posts here!</p>
+        <a href="../explore_users/explore_users.php?user_id=<?php echo $user_id?>" style="color: #0095f6; text-decoration: none;">Explore users</a>
+    </div>
 
 
-
-
-
+    <?php else: ?>
     <!-- Posts Feed -->
     <div class="posts-feed">
-        <?php if (empty($posts)): ?>
-        <div style="text-align: center; padding: 40px; color: #8e8e8e;">
-            <h3>No posts yet</h3>
-            <p>Follow people to see their posts here!</p>
-            <a href="../explore_users/explore_users.php?user_id=<?php echo $user_id?>" style="color: #0095f6; text-decoration: none;">Explore users</a>   <!-- later -->
-        </div>
 
-        <?php else: ?>
         <?php foreach ($posts as $post): ?>
+
         <div class="post">
             <!-- Post Header -->
             <div class="post-header">
@@ -511,14 +507,15 @@ $posts = $stmt->fetchAll();
 
 
         </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+
+        <?php endforeach; ?>
 
 
 
 
-        <?php if (!empty($posts)): ?>
-        <!-- After all posts -->
+
+
+        <!-- After all posts or in case the older posts has been seen previouslly-->
         <div class="caught-up">
 
             <div class="symbol">
@@ -532,63 +529,12 @@ $posts = $stmt->fetchAll();
             <h3>You're All Caught Up</h3>
             <p>You've seen all posts from your followers !</p><!--may later to add explore page to see other posts -->
         </div>
-        <?php endif; ?>
 
+        <?php endif ;?>
 
 
 
     </div>
-</div>
-
-
-
-<!-- Right Sidebar -->
-<div class="right-sidebar">
-
-    <!-- Suggestions -->
-    <div class="suggestions-header">
-        <div class="suggestions-title">Suggested for you</div>
-        <a href="#" class="see-all">See All</a>
-    </div>
-
-    <!-- Suggested Users -->
-    <div class="suggestion">
-        <img src="../profile_images/default.jpg" alt="User" class="profile-pic">
-        <div class="suggestion-info">
-            <div class="suggestion-username">franktougan</div>
-            <div class="suggestion-followers">Followed by fathalidad...</div>
-        </div>
-        <button class="follow-btn">Follow</button>
-    </div>
-
-
-    <div class="suggestion">
-        <img src="../profile_images/default.jpg" alt="User" class="profile-pic">
-        <div class="suggestion-info">
-            <div class="suggestion-username">aya_rawajbeh</div>
-            <div class="suggestion-followers">Followed by alia_s.sama...</div>
-        </div>
-        <button class="follow-btn">Follow</button>
-    </div>
-
-    <div class="suggestion">
-        <img src="../profile_images/default.jpg" alt="User" class="profile-pic">
-        <div class="suggestion-info">
-            <div class="suggestion-username">gidx_mru</div>
-            <div class="suggestion-followers">Followed by zhorouq_d...</div>
-        </div>
-        <button class="follow-btn">Follow</button>
-    </div>
-
-
-
-    <!-- Footer Links -->
-    <div class="footer-links">
-        <a href="#">About</a> • <a href="#">Help</a> • <a href="#">Press</a> • <a href="#">API</a> •
-        <a href="#">Jobs</a> • <a href="#">Privacy</a> • <a href="#">Terms</a> • <a href="#">Locations</a> •
-        <a href="#">Language</a> • <a href="#">Meta Verified</a>
-    </div>
-    <div class="copyright">© 2025 INSTAGRAM FROM META</div>
 </div>
 
 
